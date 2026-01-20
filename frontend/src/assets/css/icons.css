@@ -1,0 +1,8 @@
+.icon-search::before { content: "🔍"; }
+.icon-filter::before { content: "⚙️"; }
+.icon-play::before { content: "▶️"; }
+.icon-heart::before { content: "❤️"; }
+.icon-cart::before { content: "🛒"; }
+.icon-star-filled::before { content: "★"; color: gold; }
+.icon-star-empty::before { content: "☆"; }
+/* ... ajoute les autres icônes */

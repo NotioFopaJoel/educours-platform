@@ -1,0 +1,9 @@
+# Nettoyer les données
+node database/cleanup_old_data.js --dry-run  # Voir ce qui serait supprimé
+node database/cleanup_old_data.js --execute  # Exécuter le nettoyage
+
+# Sauvegarder
+./database/backup_restore.sh --backup
+
+# Restaurer
+./database/backup_restore.sh --restore backup_2024_01_15.sql
