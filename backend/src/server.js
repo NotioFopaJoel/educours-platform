@@ -218,7 +218,7 @@ const mongooseOptions = {
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/educours', mongooseOptions)
 .then(() => {
-  logger.info('✅ MongoDB connecté avec succès');
+  logger.info('✅ MongoDB connecté avec succès to Atlas');
   
   // Événements de connexion
   mongoose.connection.on('error', (err) => {
