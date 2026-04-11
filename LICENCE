@@ -1,0 +1,13 @@
+ngrok config add-authtoken 37vx4ricbXo503c0R2SJsChQ3oc_5ycBWHxTk4N2rYcMMjUW9
+
+
+
+api key deepseek " sk-4fd82723a38a423d9451c9bae8c28ef0 "
+
+
+mongodb atlas "scorpionxxxl9_db_user"
+passe: OxH7mx5bepEqJFrZ
+ip: 102.244.204.65  
+
+
+mongodb+srv://scorpionxxxl9_db_user:OxH7mx5bepEqJFrZ@cluster0.avyfmmu.mongodb.net/?appName=Cluster0

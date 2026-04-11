@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur EDUCOURS</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .welcome-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #374151;
+        }
+        
+        .features {
+            margin: 40px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            background: #4f46e5;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            margin: 0 0 5px 0;
+            color: #1f2937;
+        }
+        
+        .feature-content p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4f46e5;
+            margin: 0;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 5px 0 0 0;
+        }
+        
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        .button:hover {
+            background: #4338ca;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            font-size: 14px;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bienvenue sur EDUCOURS !</h1>
+            <p>Votre voyage d'apprentissage commence maintenant</p>
+        </div>
+        
+        <div class="content">
+            <div class="welcome-text">
+                Félicitations <strong><%= name || 'Utilisateur' %></strong> !<br><br>
+                Nous sommes ravis de vous accueillir dans notre communauté de plus de <strong>50,000 apprenants</strong>.
+                Votre compte a été activé avec succès et vous êtes maintenant prêt à commencer votre apprentissage.
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-content">
+                        <h3>Cours certifiants</h3>
+                        <p>Accédez à des centaines de cours avec certifications reconnues</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎓</div>
+                    <div class="feature-content">
+                        <h3>Enseignants experts</h3>
+                        <p>Apprenez avec des professionnels expérimentés</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-content">
+                        <h3>Communauté active</h3>
+                        <p>Échangez avec des milliers d'apprenants passionnés</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-content">
+                        <h3>Apprentissage flexible</h3>
+                        <p>Apprenez à votre rythme, où que vous soyez</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Cours disponibles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taux de satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Apprenants actifs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support disponible</div>
+                </div>
+            </div>
+            
+            <div class="cta">
+                <p style="font-size: 16px; margin-bottom: 20px; color: #374151;">
+                    Prêt à commencer votre premier cours ?
+                </p>
+                <a href="<%= appUrl || 'http://localhost:3000' %>/dashboard" class="button">
+                    Accéder à mon tableau de bord
+                </a>
+            </div>
+            
+            <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #92400e; margin-top: 0;">Prochaines étapes recommandées :</h3>
+                <ol style="color: #92400e; margin-bottom: 0;">
+                    <li>Complétez votre profil pour des recommandations personnalisées</li>
+                    <li>Explorez les cours recommandés selon vos centres d'intérêt</li>
+                    <li>Rejoignez votre premier cours gratuit</li>
+                </ol>
+            </div>
+            
+            <p style="color: #6b7280; font-size: 14px; text-align: center;">
+                Besoin d'aide ? Consultez notre <a href="<%= appUrl || 'http://localhost:3000' %>/faq" style="color: #4f46e5;">centre d'aide</a> ou contactez notre équipe de support.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p style="margin-top: 0;">
+                <strong>EDUCOURS</strong> - Transformez votre apprentissage<br>
+                <small><%= year %> © Tous droits réservés</small>
+            </p>
+            <p style="margin-bottom: 0;">
+                <a href="<%= appUrl || 'http://localhost:3000' %>">Visiter notre site</a> | 
+                <a href="<%= appUrl || 'http://localhost:3000' %>/courses">Explorer les cours</a> | 
+                <a href="mailto:support@educours.com">Nous contacter</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
