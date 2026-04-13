@@ -29,21 +29,21 @@ const generateToken = (user) => {
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, passwordHash, role } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     const exists = await User.findOne({ email });
     if (exists) {
       return res.status(400).json({ success: false, message: 'Email déjà utilisé' });
     }
 
-    const Password = await bcrypt.hash(passwordHash, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
 
     const user = await User.create({
       firstName,
       lastName,
       email,
-      passwordHash: Password,
+      password: hashedPassword,
       role: role || 'student',
       emailVerificationToken: verificationToken,
       emailVerificationExpires: Date.now() + 24 * 60 * 60 * 1000
@@ -60,11 +60,13 @@ exports.register = async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Inscription réussie. Vérifiez votre email.',
-      token: generateToken(user),
-      user
+      data: {
+        token: generateToken(user),
+        user
+      }
     });
   } catch (e) {
-    res.status(500).json({ success: false, message: e.messag , });
+    res.status(500).json({ success: false, message: e.message });
   }
 };
 
@@ -74,10 +76,10 @@ exports.register = async (req, res) => {
 // La fonction login DOIT ressembler à ceci :
 exports.login = async (req, res) => {
   try {
-    const { email, passwordHash } = req.body;
+    const { email, password } = req.body;
 
     // 1. Validation
-    if (!email || !passwordHash) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: 'Email et mot de passe requis'
@@ -85,7 +87,7 @@ exports.login = async (req, res) => {
     }
 
     // 2. Chercher l'utilisateur
-    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
 
     if (!user) {
       return res.status(401).json({
@@ -103,7 +105,7 @@ exports.login = async (req, res) => {
     }
 
     // 4. Vérifier si le compte est vérifié
-    if (!user.isVerified) {
+    if (!user.isEmailVerified) {
       return res.status(403).json({
         success: false,
         message: 'Veuillez vérifier votre email avant de vous connecter',
@@ -112,7 +114,7 @@ exports.login = async (req, res) => {
     }
 
     // 5. Vérifier le mot de passe
-    const isPasswordValid = await bcrypt.compare(passwordHash, user.passwordHash);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -149,7 +151,8 @@ exports.login = async (req, res) => {
           lastName: user.lastName,
           role: user.role,
           avatar: user.avatar,
-          isVerified: user.isVerified
+          isVerified: user.isEmailVerified,
+          isActive: user.isActive
         }
       }
     });
@@ -353,6 +356,31 @@ exports.logoutAllDevices = async (req, res) => {
 
 exports.checkToken = async (req, res) => {
   res.json({ success: true, user: req.user });
+};
+
+exports.getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password -emailverificationToken -resetPasswordToken');
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'Utilisateur non trouvé' });
+    }
+    res.json({ 
+      success: true, 
+      data: {
+        id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+        avatar: user.avatar,
+        isVerified: user.isEmailVerified,
+        isActive: user.isActive
+      }
+    });
+  } catch (error) {
+    console.error('Error getting current user:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 /* =========================

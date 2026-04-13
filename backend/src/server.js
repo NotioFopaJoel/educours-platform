@@ -28,7 +28,7 @@ const videoRoutes = require('./routes/video.routes');
 //const materialRoutes = require('./routes/material.routes');
 //const notificationRoutes = require('./routes/notification.routes');
 //const quizRoutes = require('./routes/quiz.routes');
-console.log("The server is running at .....");
+
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -351,7 +351,7 @@ app.use('/api/videos', authMiddleware.verifyToken, videoRoutes);
 //app.use('/api/quiz', authMiddleware.verifyToken, quizRoutes);
 //app.use('/api/notification', authMiddleware.verifyToken, notificationRoutes);
 
-console.log("the server is running good......");
+
 // ================ 14. MIDDLEWARE DE TIMEOUT ================
 app.use((req, res, next) => {
   req.setTimeout(30000, () => {
@@ -417,4 +417,4 @@ process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
 module.exports = { app, server, io };
-
+console.log("the server is running good......");

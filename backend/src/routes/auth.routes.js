@@ -81,6 +81,9 @@ router.post('/reset-password/:token', [
 // Vérifier token (pour auto-login frontend)
 router.get('/check-token', authMiddleware.verifyToken, authController.checkToken );
 
+// Récupérer les infos de l'utilisateur actuel
+router.get('/me', authMiddleware.verifyToken, authController.getCurrentUser );
+
 // === ROUTES PROTÉGÉES ===
 
 // Rafraîchir token

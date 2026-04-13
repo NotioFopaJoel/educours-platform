@@ -8,14 +8,22 @@ const createAdmin = async () => {
     
     const User = require('../models/User.model');
     
+    const hashedPassword = await bcrypt.hash('Admin123456', 10);
+    
     const adminExists = await User.findOne({ email: 'admin@educours.com' });
     
     if (adminExists) {
-      console.log('⚠️ Admin existe déjà');
+      console.log('⚠️ Admin existe déjà, mise à jour...');
+      adminExists.password = hashedPassword;
+      adminExists.role = 'admin';
+      adminExists.isEmailVerified = true;
+      adminExists.isActive = true;
+      await adminExists.save();
+      console.log('✅ Admin mis à jour avec succès !');
+      console.log('📧 Email: admin@educours.com');
+      console.log('🔑 Mot de passe: Admin123456');
       process.exit(0);
     }
-    
-    const hashedPassword = await bcrypt.hash('Admin123456', 10);
     
     const admin = new User({
       firstName: 'Super',
