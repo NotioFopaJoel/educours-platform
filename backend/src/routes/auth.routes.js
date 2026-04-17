@@ -30,7 +30,8 @@ const registerLimiter = rateLimit({
 
 // Inscription
 router.post('/register', registerLimiter, [
-    body('name').trim().notEmpty().withMessage('Le nom est requis'),
+    body('firstName').trim().notEmpty().withMessage('Le prénom est requis'),
+    body('lastName').trim().notEmpty().withMessage('Le nom est requis'),
     body('email').isEmail().withMessage('Email invalide'),
     body('password')
         .isLength({ min: 6 })
@@ -65,6 +66,8 @@ router.post('/facebook', authController.facebookAuth);
 // Vérification email
 router.get('/verify-email/:token', authController.verifyEmail);
 router.post('/resend-verification', authController.resendVerificationEmail);
+router.post('/send-verification-code', authController.sendVerificationCode);
+router.post('/verify-code', authController.verifyCode);
 
 // Mot de passe oublié
 router.post('/forgot-password', [
@@ -92,6 +95,7 @@ router.post('/refresh-token', authController.refreshToken);
 // Déconnexion
 router.post('/logout', authMiddleware.verifyToken, authController.logout);
 
+
 // Déconnexion de tous les appareils
 router.post('/logout-all', authMiddleware.verifyToken, authController.logoutAllDevices);
 
@@ -108,6 +112,10 @@ router.put('/avatar', authMiddleware.verifyToken,
     handleUploadError,
     authController.updateAvatar
 );
+
+// Email verification with 6-digit code
+router.post('/send-verification-code', authController.sendVerificationCode);
+router.post('/verify-code', authController.verifyCode);
 
 // Changer le mot de passe (utilisateur connecté)
 router.put('/change-password', authMiddleware.verifyToken, [

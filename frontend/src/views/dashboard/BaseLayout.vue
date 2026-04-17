@@ -58,7 +58,7 @@
           </div>
           <div class="user-info">
             <div class="user-name">{{ getUserFullName }}</div>
-            <div class="user-role">{{ user.role | capitalize }}</div>
+           <div class="user-role">{{ capitalizeRole }}</div>
           </div>
           <i class="fas fa-chevron-down"></i>
           
@@ -102,7 +102,7 @@
           </div>
           <div class="user-details-sidebar">
             <div class="user-name">{{ getUserFullName }}</div>
-            <div class="user-role">{{ user.role | capitalize }}</div>
+            <div class="user-role">{{ capitalizeRole }}</div>
           </div>
         </div>
       </div>
@@ -283,7 +283,7 @@
           </div>
           <div class="stat-item" v-else-if="user.role === 'admin'">
             <i class="fas fa-chart-line"></i>
-            <span>{{ totalRevenue | currency }} Revenue</span>
+            <span>{{ formatPrice(totalRevenue) }} Revenue</span>
           </div>
         </div>
       </div>
@@ -753,6 +753,17 @@ const handleAssignmentSubmitted = () => {
   closeAssignmentModal()
 }
 
+// Ajoutez cette fonction
+const formatPrice = (price) => {
+  if (!price) return '0 €'
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price)
+}
+
 const handleQuizCompleted = (result) => {
   toast.success(`Quiz completed! Score: ${result.score}/${result.total}`)
   closeQuizModal()
@@ -779,7 +790,7 @@ onMounted(async () => {
   try {
     await Promise.all([
       courseStore.fetchEnrolledCourses(),
-      notificationStore.fetchNotifications()
+      notificationStore.initialize()
     ])
   } catch (error) {
     console.error('Failed to initialize dashboard data:', error)
@@ -800,6 +811,11 @@ watch(() => route.path, () => {
   closeSidebar()
   showNotificationDropdown.value = false
   showUserDropdown.value = false
+})
+
+const capitalizeRole = computed(() => {
+  if (!user.value?.role) return ''
+  return user.value.role.charAt(0).toUpperCase() + user.value.role.slice(1)
 })
 </script>
 

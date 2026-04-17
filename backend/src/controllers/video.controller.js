@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto-js');
+const crypto = require('crypto');
 
 // Configure Cloudinary
 cloudinary.config({

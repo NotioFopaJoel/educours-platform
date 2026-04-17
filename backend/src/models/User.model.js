@@ -17,6 +17,23 @@ userSchema = new mongoose.Schema({
   notificationStats: {
     unreadcount: {type: Number, default: 0},totalCount: {type: Number, default: 0},lastUpdated: {type: Date, default: Date.now }
   },
+  // Ajoute ces champs à ton schéma User existant
+emailVerificationToken: {
+  type: String,
+  default: null
+},
+emailVerificationExpires: {
+  type: Date,
+  default: null
+},
+isEmailVerified: {
+  type: Boolean,
+  default: false
+},
+welcomeEmailSent: {
+  type: Boolean,
+  default: false
+},
   firstName: {
     type: String,
     required: true,
@@ -36,7 +53,7 @@ userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
+    required: false,
     unique: true,
     trim: true
   },
@@ -61,7 +78,7 @@ userSchema = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true
+    required: false
   },
   country: {
     type: String,

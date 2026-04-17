@@ -480,7 +480,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import BaseLayout from '../BaseLayout.vue'
+//import BaseLayout from '../BaseLayout.vue'
 import BaseModal from '@/components/common/BaseModal.vue'
 import CourseCreationForm from '@/components/courses/CourseCreationForm.vue'
 import LiveSessionSchedule from '@/components/live/LiveSessionSchedule.vue'

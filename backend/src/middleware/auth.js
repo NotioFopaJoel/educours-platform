@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User.model');
 const logger = require('../utils/logger');
-const crypto = require('crypto-js');
+const crypto = require('crypto');
 
 // Cache pour éviter les requêtes DB répétées
 const tokenCache = new Map();

@@ -2,29 +2,29 @@
   <div class="register-view">
     <div class="container">
       <div class="register-container">
-        <!-- Left Column: Form -->
+        <!-- Colonne gauche : Formulaire -->
         <div class="register-form-section">
           <div class="form-header">
             <router-link to="/" class="logo-link">
               <i class="icon-graduation-cap"></i>
               <span class="logo-text">EDUCOURS</span>
             </router-link>
-            <h1>Create Your Account</h1>
-            <p>Join our learning community and start your educational journey</p>
+            <h1>Créer votre compte</h1>
+            <p>Rejoignez notre communauté d'apprenants et commencez votre voyage d'apprentissage</p>
           </div>
 
-          <!-- Registration Steps -->
+          <!-- Étapes d'inscription -->
           <div class="registration-steps">
             <div class="steps-indicator">
               <div
-                v-for="(step, index) in steps"
-                :key="step.id"
-                class="step-item"
-                :class="{
+                  v-for="(step, index) in steps"
+                  :key="step.id"
+                  class="step-item"
+                  :class="{
                   active: currentStep === step.id,
                   completed: completedSteps.includes(step.id)
                 }"
-                @click="goToStep(step.id)"
+                  @click="goToStep(step.id)"
               >
                 <div class="step-number">{{ index + 1 }}</div>
                 <div class="step-info">
@@ -35,97 +35,76 @@
             </div>
           </div>
 
-          <!-- Form Steps -->
+          <!-- Formulaire par étapes -->
           <div class="form-steps">
-            <!-- STEP 1: Basic Information -->
+            <!-- Étape 1 : Informations de base -->
             <div v-show="currentStep === 'basic'" class="form-step">
               <form @submit.prevent="validateStep1">
                 <div class="form-grid">
                   <div class="form-group">
-                    <label for="firstName">First Name *</label>
+                    <label for="firstName">Prénom *</label>
                     <input
-                      type="text"
-                      id="firstName"
-                      v-model="formData.firstName"
-                      :class="{ 'form-input': true, 'error': errors.firstName }"
-                      placeholder="John"
-                      autofocus
-                    />
+                        type="text"
+                        id="firstName"
+                        v-model="formData.firstName"
+                        :class="{ 'form-input': true, 'error': errors.firstName }"
+                        placeholder="Jean"
+                        autofocus
+                    >
                     <span v-if="errors.firstName" class="error-message">{{ errors.firstName }}</span>
                   </div>
 
                   <div class="form-group">
-                    <label for="lastName">Last Name *</label>
+                    <label for="lastName">Nom *</label>
                     <input
-                      type="text"
-                      id="lastName"
-                      v-model="formData.lastName"
-                      :class="{ 'form-input': true, 'error': errors.lastName }"
-                      placeholder="Doe"
-                    />
+                        type="text"
+                        id="lastName"
+                        v-model="formData.lastName"
+                        :class="{ 'form-input': true, 'error': errors.lastName }"
+                        placeholder="Dupont"
+                    >
                     <span v-if="errors.lastName" class="error-message">{{ errors.lastName }}</span>
                   </div>
 
                   <div class="form-group">
-                    <label for="email">Email Address *</label>
+                    <label for="email">Email *</label>
                     <input
-                      type="email"
-                      id="email"
-                      v-model="formData.email"
-                      :class="{ 'form-input': true, 'error': errors.email }"
-                      placeholder="john.doe@example.com"
-                    />
+                        type="email"
+                        id="email"
+                        v-model="formData.email"
+                        :class="{ 'form-input': true, 'error': errors.email }"
+                        placeholder="jean@exemple.com"
+                    >
                     <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
                   </div>
 
                   <div class="form-group">
-                    <label for="phone">Phone Number *</label>
+                    <label for="phone">Téléphone</label>
                     <input
-                      type="tel"
-                      id="phone"
-                      v-model="formData.phone"
-                      :class="{ 'form-input': true, 'error': errors.phone }"
-                      placeholder="+237 6XX XXX XXX"
-                    />
+                        type="tel"
+                        id="phone"
+                        v-model="formData.phone"
+                        :class="{ 'form-input': true, 'error': errors.phone }"
+                        placeholder="+33 6 12 34 56 78"
+                    >
                     <span v-if="errors.phone" class="error-message">{{ errors.phone }}</span>
                   </div>
 
-                  <div class="form-group full-width">
-                    <label>I am a *</label>
-                    <div class="role-cards">
-                      <div
-                        class="role-card"
-                        :class="{ selected: formData.role === 'student' }"
-                        @click="formData.role = 'student'"
-                      >
-                        <div class="role-icon">🎓</div>
-                        <div class="role-title">Student</div>
-                        <div class="role-desc">I want to learn and take courses</div>
-                      </div>
-                      <div
-                        class="role-card"
-                        :class="{ selected: formData.role === 'teacher' }"
-                        @click="formData.role = 'teacher'"
-                      >
-                        <div class="role-icon">👨‍🏫</div>
-                        <div class="role-title">Teacher</div>
-                        <div class="role-desc">I want to create and share courses</div>
-                      </div>
-                    </div>
-                    <span v-if="errors.role" class="error-message">{{ errors.role }}</span>
-                  </div>
-
                   <div class="form-group">
-                    <label for="password">Password *</label>
+                    <label for="password">Mot de passe *</label>
                     <div class="password-input">
                       <input
-                        :type="showPassword ? 'text' : 'password'"
-                        id="password"
-                        v-model="formData.password"
-                        :class="{ 'form-input': true, 'error': errors.password }"
-                        placeholder="Create a secure password"
-                      />
-                      <button type="button" class="btn-toggle-password" @click="togglePasswordVisibility">
+                          :type="showPassword ? 'text' : 'password'"
+                          id="password"
+                          v-model="formData.password"
+                          :class="{ 'form-input': true, 'error': errors.password }"
+                          placeholder="Créez un mot de passe sécurisé"
+                      >
+                      <button
+                          type="button"
+                          class="btn-toggle-password"
+                          @click="togglePasswordVisibility"
+                      >
                         <i :class="showPassword ? 'icon-eye-off' : 'icon-eye'"></i>
                       </button>
                     </div>
@@ -133,51 +112,55 @@
                     <div class="password-strength">
                       <div class="strength-meter">
                         <div
-                          class="strength-fill"
-                          :style="{ width: passwordStrength + '%' }"
-                          :class="passwordStrengthClass"
+                            class="strength-fill"
+                            :style="{ width: passwordStrength + '%' }"
+                            :class="passwordStrengthClass"
                         ></div>
                       </div>
                       <span class="strength-text">{{ passwordStrengthText }}</span>
                     </div>
                     <div class="password-requirements">
-                      <p>Password must contain:</p>
+                      <p>Le mot de passe doit contenir :</p>
                       <ul>
                         <li :class="{ valid: hasMinLength }">
                           <i :class="hasMinLength ? 'icon-check' : 'icon-x'"></i>
-                          At least 8 characters
+                          Au moins 8 caractères
                         </li>
                         <li :class="{ valid: hasUpperCase }">
                           <i :class="hasUpperCase ? 'icon-check' : 'icon-x'"></i>
-                          One uppercase letter
+                          Une lettre majuscule
                         </li>
                         <li :class="{ valid: hasLowerCase }">
                           <i :class="hasLowerCase ? 'icon-check' : 'icon-x'"></i>
-                          One lowercase letter
+                          Une lettre minuscule
                         </li>
                         <li :class="{ valid: hasNumber }">
                           <i :class="hasNumber ? 'icon-check' : 'icon-x'"></i>
-                          One number
+                          Un chiffre
                         </li>
                         <li :class="{ valid: hasSpecialChar }">
                           <i :class="hasSpecialChar ? 'icon-check' : 'icon-x'"></i>
-                          One special character
+                          Un caractère spécial
                         </li>
                       </ul>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="confirmPassword">Confirm Password *</label>
+                    <label for="confirmPassword">Confirmer le mot de passe *</label>
                     <div class="password-input">
                       <input
-                        :type="showConfirmPassword ? 'text' : 'password'"
-                        id="confirmPassword"
-                        v-model="formData.confirmPassword"
-                        :class="{ 'form-input': true, 'error': errors.confirmPassword }"
-                        placeholder="Confirm your password"
-                      />
-                      <button type="button" class="btn-toggle-password" @click="toggleConfirmPasswordVisibility">
+                          :type="showConfirmPassword ? 'text' : 'password'"
+                          id="confirmPassword"
+                          v-model="formData.confirmPassword"
+                          :class="{ 'form-input': true, 'error': errors.confirmPassword }"
+                          placeholder="Retapez votre mot de passe"
+                      >
+                      <button
+                          type="button"
+                          class="btn-toggle-password"
+                          @click="toggleConfirmPasswordVisibility"
+                      >
                         <i :class="showConfirmPassword ? 'icon-eye-off' : 'icon-eye'"></i>
                       </button>
                     </div>
@@ -188,15 +171,15 @@
                 <div class="form-actions">
                   <router-link to="/login" class="btn-link">
                     <i class="icon-arrow-left"></i>
-                    Already have an account?
+                    Déjà un compte ?
                   </router-link>
                   <button type="submit" class="btn-primary" :disabled="loading">
                     <span v-if="loading">
                       <i class="icon-loader"></i>
-                      Checking...
+                      Vérification...
                     </span>
                     <span v-else>
-                      Continue
+                      Continuer
                       <i class="icon-arrow-right"></i>
                     </span>
                   </button>
@@ -204,241 +187,150 @@
               </form>
             </div>
 
-            <!-- STEP 2: Role-Specific Profile -->
+            <!-- Étape 2 : Profil -->
             <div v-show="currentStep === 'profile'" class="form-step">
               <form @submit.prevent="validateStep2">
-                <!-- STUDENT FORM -->
-                <div v-if="formData.role === 'student'" class="role-form">
-                  <div class="section-title">
-                    <span class="section-icon">📚</span>
-                    <h3>Academic Information</h3>
-                  </div>
-
-                  <div class="form-grid">
-                    <div class="form-group">
-                      <label for="studentLevel">Education Level</label>
-                      <select id="studentLevel" v-model="formData.studentInfo.level">
-                        <option value="Ordinary Level">Ordinary Level (Grades 10-11)</option>
-                        <option value="Advanced Level">Advanced Level (Grades 12-13)</option>
-                        <option value="University">University / Bachelor's</option>
-                        <option value="Master">Master's Degree</option>
-                        <option value="PhD">PhD / Doctorate</option>
-                        <option value="Professional">Professional Training</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="studentSchool">School / University</label>
-                      <input id="studentSchool" v-model="formData.studentInfo.school" type="text" placeholder="Name of your school or university" />
-                    </div>
-
-                    <div class="form-group">
-                      <label for="studentMajor">Major / Field of Study</label>
-                      <input id="studentMajor" v-model="formData.studentInfo.major" type="text" placeholder="e.g., Computer Science, Mathematics" />
-                    </div>
-
-                    <div class="form-group">
-                      <label for="studentYear">Year of Study</label>
-                      <select id="studentYear" v-model="formData.studentInfo.year">
-                        <option value="1st Year">1st Year</option>
-                        <option value="2nd Year">2nd Year</option>
-                        <option value="3rd Year">3rd Year</option>
-                        <option value="4th Year">4th Year</option>
-                        <option value="5th Year">5th Year+</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="section-title">
-                    <span class="section-icon">👨‍👩‍👧</span>
-                    <h3>Guardian Information (Optional)</h3>
-                  </div>
-
-                  <div class="form-grid">
-                    <div class="form-group">
-                      <label for="guardianName">Guardian Name</label>
-                      <input id="guardianName" v-model="formData.studentInfo.guardianName" type="text" placeholder="Parent or guardian's name" />
-                    </div>
-                    <div class="form-group">
-                      <label for="guardianPhone">Guardian Phone</label>
-                      <input id="guardianPhone" v-model="formData.studentInfo.guardianPhone" type="tel" placeholder="+237 ..." />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- TEACHER FORM -->
-                <div v-if="formData.role === 'teacher'" class="role-form">
-                  <div class="section-title">
-                    <span class="section-icon">🎓</span>
-                    <h3>Professional Qualifications</h3>
-                  </div>
-
-                  <div class="form-grid">
-                    <div class="form-group">
-                      <label for="teacherQualification">Qualification / Degree *</label>
-                      <input
-                        id="teacherQualification"
-                        v-model="formData.teacherInfo.qualification"
-                        type="text"
-                        :class="{ error: errors.teacherQualification }"
-                        placeholder="e.g., Master's in Mathematics, PhD in Physics"
-                        @blur="validateField('teacherQualification')"
-                      />
-                      <span v-if="errors.teacherQualification" class="error-message">{{ errors.teacherQualification }}</span>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="teacherExperience">Years of Experience</label>
-                      <input
-                        id="teacherExperience"
-                        v-model.number="formData.teacherInfo.experience"
-                        type="number"
-                        min="0"
-                        placeholder="0"
-                      />
-                    </div>
-
-                    <div class="form-group full-width">
-                      <label for="teacherSubjects">Subjects Taught *</label>
-                      <div class="subjects-input">
-                        <div v-for="(subject, idx) in teacherSubjectsList" :key="idx" class="subject-tag">
-                          {{ subject }}
-                          <button type="button" @click="removeSubject(idx)">×</button>
-                        </div>
-                        <select v-model="selectedSubject" @change="addSubject" class="subject-select">
-                          <option value="">Select a subject...</option>
-                          <option v-for="sub in predefinedSubjects" :key="sub" :value="sub">{{ sub }}</option>
-                        </select>
-                      </div>
-                      <span v-if="errors.teacherSubjects" class="error-message">{{ errors.teacherSubjects }}</span>
-                    </div>
-
-                    <div class="form-group full-width">
-                      <label for="teacherSpecialties">Specialties / Areas of Expertise</label>
-                      <div class="subjects-input">
-                        <div v-for="(spec, idx) in teacherSpecialtiesList" :key="idx" class="subject-tag">
-                          {{ spec }}
-                          <button type="button" @click="removeSpecialty(idx)">×</button>
-                        </div>
-                        <select v-model="selectedSpecialty" @change="addSpecialty" class="subject-select">
-                          <option value="">Select a specialty...</option>
-                          <option v-for="spec in predefinedSpecialties" :key="spec" :value="spec">{{ spec }}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="section-title">
-                    <span class="section-icon">💰</span>
-                    <h3>Payment Information</h3>
-                    <p class="section-desc">How would you like to receive your payments?</p>
-                  </div>
-
-                  <div class="payment-methods">
-                    <div
-                      class="payment-method"
-                      :class="{ active: formData.teacherInfo.paymentMethod.type === 'mtn' }"
-                      @click="formData.teacherInfo.paymentMethod.type = 'mtn'"
-                    >
-                      <div class="payment-icon">📱</div>
-                      <div class="payment-name">MTN Mobile Money</div>
-                    </div>
-                    <div
-                      class="payment-method"
-                      :class="{ active: formData.teacherInfo.paymentMethod.type === 'orange' }"
-                      @click="formData.teacherInfo.paymentMethod.type = 'orange'"
-                    >
-                      <div class="payment-icon">📱</div>
-                      <div class="payment-name">Orange Money</div>
-                    </div>
-                    <div
-                      class="payment-method"
-                      :class="{ active: formData.teacherInfo.paymentMethod.type === 'bank' }"
-                      @click="formData.teacherInfo.paymentMethod.type = 'bank'"
-                    >
-                      <div class="payment-icon">🏦</div>
-                      <div class="payment-name">Bank Transfer</div>
-                    </div>
-                  </div>
-
-                  <div v-if="formData.teacherInfo.paymentMethod.type === 'mtn'" class="form-group">
-                    <label for="teacherMtnNumber">MTN Number</label>
-                    <input id="teacherMtnNumber" v-model="formData.teacherInfo.paymentMethod.details.mtnNumber" type="tel" placeholder="6XX XXX XXX" />
-                  </div>
-
-                  <div v-if="formData.teacherInfo.paymentMethod.type === 'orange'" class="form-group">
-                    <label for="teacherOrangeNumber">Orange Number</label>
-                    <input id="teacherOrangeNumber" v-model="formData.teacherInfo.paymentMethod.details.orangeNumber" type="tel" placeholder="6XX XXX XXX" />
-                  </div>
-
-                  <div v-if="formData.teacherInfo.paymentMethod.type === 'bank'" class="form-grid">
-                    <div class="form-group">
-                      <label for="bankName">Bank Name</label>
-                      <input id="bankName" v-model="formData.teacherInfo.paymentMethod.details.bankName" type="text" placeholder="e.g., Société Générale" />
-                    </div>
-                    <div class="form-group">
-                      <label for="accountNumber">Account Number</label>
-                      <input id="accountNumber" v-model="formData.teacherInfo.paymentMethod.details.accountNumber" type="text" placeholder="Bank account number" />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Location & Bio (Common) -->
-                <div class="section-title">
-                  <span class="section-icon">📍</span>
-                  <h3>Location</h3>
-                </div>
-
                 <div class="form-grid">
                   <div class="form-group">
-                    <label for="country">Country *</label>
-                    <select id="country" v-model="formData.country" :class="{ error: errors.country }">
-                      <option value="">Select your country</option>
-                      <option value="Cameroon">Cameroon</option>
-                      <option value="France">France</option>
-                      <option value="Canada">Canada</option>
-                      <option value="Belgium">Belgium</option>
-                      <option value="Switzerland">Switzerland</option>
-                      <option value="Senegal">Senegal</option>
-                      <option value="Ivory Coast">Ivory Coast</option>
-                      <option value="Morocco">Morocco</option>
-                      <option value="Tunisia">Tunisia</option>
+                    <label>Date de naissance</label>
+                    <input
+                        type="date"
+                        v-model="formData.birthDate"
+                        :class="{ 'form-input': true, 'error': errors.birthDate }"
+                    >
+                    <span v-if="errors.birthDate" class="error-message">{{ errors.birthDate }}</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Genre</label>
+                    <div class="radio-group">
+                      <label class="radio-label">
+                        <input
+                            type="radio"
+                            v-model="formData.gender"
+                            value="male"
+                            class="radio-input"
+                        >
+                        <span class="radio-custom"></span>
+                        Homme
+                      </label>
+                      <label class="radio-label">
+                        <input
+                            type="radio"
+                            v-model="formData.gender"
+                            value="female"
+                            class="radio-input"
+                        >
+                        <span class="radio-custom"></span>
+                        Femme
+                      </label>
+                      <label class="radio-label">
+                        <input
+                            type="radio"
+                            v-model="formData.gender"
+                            value="other"
+                            class="radio-input"
+                        >
+                        <span class="radio-custom"></span>
+                        Autre
+                      </label>
+                      <label class="radio-label">
+                        <input
+                            type="radio"
+                            v-model="formData.gender"
+                            value="prefer_not_to_say"
+                            class="radio-input"
+                        >
+                        <span class="radio-custom"></span>
+                        Préfère ne pas dire
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Pays *</label>
+                    <select
+                        v-model="formData.country"
+                        :class="{ 'form-select': true, 'error': errors.country }"
+                    >
+                      <option value="">Sélectionnez votre pays</option>
+                      <option value="FR">France</option>
+                      <option value="BE">Belgique</option>
+                      <option value="CH">Suisse</option>
+                      <option value="CA">Canada</option>
+                      <option value="SN">Sénégal</option>
+                      <option value="CI">Côte d'Ivoire</option>
+                      <option value="MA">Maroc</option>
+                      <option value="TN">Tunisie</option>
                     </select>
                     <span v-if="errors.country" class="error-message">{{ errors.country }}</span>
                   </div>
 
                   <div class="form-group">
-                    <label for="city">City</label>
-                    <input id="city" v-model="formData.city" type="text" placeholder="Douala, Yaoundé, Paris..." />
+                    <label>Ville</label>
+                    <input
+                        type="text"
+                        v-model="formData.city"
+                        :class="{ 'form-input': true, 'error': errors.city }"
+                        placeholder="Paris"
+                    >
+                    <span v-if="errors.city" class="error-message">{{ errors.city }}</span>
                   </div>
-                </div>
 
-                <div class="section-title">
-                  <span class="section-icon">📝</span>
-                  <h3>About You</h3>
-                </div>
+                  <div class="form-group">
+                    <label>Niveau d'études</label>
+                    <select
+                        v-model="formData.educationLevel"
+                        :class="{ 'form-select': true, 'error': errors.educationLevel }"
+                    >
+                      <option value="">Sélectionnez votre niveau</option>
+                      <option value="bac">Baccalauréat</option>
+                      <option value="bac+2">Bac+2 (BTS, DUT)</option>
+                      <option value="bac+3">Bac+3 (Licence)</option>
+                      <option value="bac+5">Bac+5 (Master)</option>
+                      <option value="doctorat">Doctorat</option>
+                      <option value="other">Autre</option>
+                    </select>
+                    <span v-if="errors.educationLevel" class="error-message">{{ errors.educationLevel }}</span>
+                  </div>
 
-                <div class="form-group">
-                  <textarea
-                    v-model="formData.bio"
-                    rows="4"
-                    placeholder="Tell us a little about yourself, your goals, and what motivates you..."
-                  ></textarea>
-                  <div class="char-counter">{{ formData.bio?.length || 0 }}/500 characters</div>
+                  <div class="form-group">
+                    <label>Profession</label>
+                    <input
+                        type="text"
+                        v-model="formData.profession"
+                        :class="{ 'form-input': true, 'error': errors.profession }"
+                        placeholder="Développeur web"
+                    >
+                    <span v-if="errors.profession" class="error-message">{{ errors.profession }}</span>
+                  </div>
+
+                  <div class="form-group full-width">
+                    <label>À propos de vous</label>
+                    <textarea
+                        v-model="formData.bio"
+                        :class="{ 'form-textarea': true, 'error': errors.bio }"
+                        placeholder="Parlez-nous un peu de vous, de vos centres d'intérêt et de vos objectifs d'apprentissage..."
+                        rows="4"
+                    ></textarea>
+                    <div class="char-counter">
+                      {{ formData.bio?.length || 0 }}/500 caractères
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-actions">
                   <button type="button" class="btn-secondary" @click="previousStep">
                     <i class="icon-arrow-left"></i>
-                    Back
+                    Retour
                   </button>
                   <button type="submit" class="btn-primary" :disabled="loading">
                     <span v-if="loading">
                       <i class="icon-loader"></i>
-                      Checking...
+                      Vérification...
                     </span>
                     <span v-else>
-                      Continue
+                      Continuer
                       <i class="icon-arrow-right"></i>
                     </span>
                   </button>
@@ -446,22 +338,22 @@
               </form>
             </div>
 
-            <!-- STEP 3: Preferences -->
+            <!-- Étape 3 : Préférences -->
             <div v-show="currentStep === 'preferences'" class="form-step">
               <form @submit.prevent="validateStep3">
                 <div class="preferences-section">
-                  <h3>Areas of Interest</h3>
+                  <h3>Centres d'intérêt</h3>
                   <p class="section-description">
-                    Select your areas of interest to receive personalized recommendations
+                    Sélectionnez vos domaines d'intérêt pour recevoir des recommandations personnalisées
                   </p>
 
                   <div class="interests-grid">
                     <div
-                      v-for="interest in availableInterests"
-                      :key="interest.id"
-                      class="interest-card"
-                      :class="{ selected: selectedInterests.includes(interest.id) }"
-                      @click="toggleInterest(interest.id)"
+                        v-for="interest in availableInterests"
+                        :key="interest.id"
+                        class="interest-card"
+                        :class="{ selected: selectedInterests.includes(interest.id) }"
+                        @click="toggleInterest(interest.id)"
                     >
                       <div class="interest-icon">
                         <i :class="interest.icon"></i>
@@ -478,18 +370,18 @@
                 </div>
 
                 <div class="preferences-section">
-                  <h3>Learning Goals</h3>
+                  <h3>Objectifs d'apprentissage</h3>
                   <p class="section-description">
-                    What are your main goals on our platform?
+                    Quels sont vos objectifs principaux sur notre plateforme ?
                   </p>
 
                   <div class="goals-grid">
                     <div
-                      v-for="goal in availableGoals"
-                      :key="goal.id"
-                      class="goal-card"
-                      :class="{ selected: selectedGoals.includes(goal.id) }"
-                      @click="toggleGoal(goal.id)"
+                        v-for="goal in availableGoals"
+                        :key="goal.id"
+                        class="goal-card"
+                        :class="{ selected: selectedGoals.includes(goal.id) }"
+                        @click="toggleGoal(goal.id)"
                     >
                       <div class="goal-content">
                         <h4>{{ goal.title }}</h4>
@@ -500,38 +392,50 @@
                 </div>
 
                 <div class="preferences-section">
-                  <h3>Communication Preferences</h3>
+                  <h3>Préférences de communication</h3>
 
                   <div class="communication-preferences">
                     <div class="preference-item">
                       <label class="checkbox-label">
-                        <input type="checkbox" v-model="formData.newsletter" class="checkbox-input" />
+                        <input
+                            type="checkbox"
+                            v-model="formData.newsletter"
+                            class="checkbox-input"
+                        >
                         <span class="checkbox-custom"></span>
                         <div class="preference-info">
-                          <h4>Weekly Newsletter</h4>
-                          <p>Receive our best courses and articles every week</p>
+                          <h4>Newsletter hebdomadaire</h4>
+                          <p>Recevez nos meilleurs cours et articles chaque semaine</p>
                         </div>
                       </label>
                     </div>
 
                     <div class="preference-item">
                       <label class="checkbox-label">
-                        <input type="checkbox" v-model="formData.courseRecommendations" class="checkbox-input" />
+                        <input
+                            type="checkbox"
+                            v-model="formData.courseRecommendations"
+                            class="checkbox-input"
+                        >
                         <span class="checkbox-custom"></span>
                         <div class="preference-info">
-                          <h4>Course Recommendations</h4>
-                          <p>Get notified about new courses matching your interests</p>
+                          <h4>Recommandations de cours</h4>
+                          <p>Soyez notifié des nouveaux cours correspondant à vos intérêts</p>
                         </div>
                       </label>
                     </div>
 
                     <div class="preference-item">
                       <label class="checkbox-label">
-                        <input type="checkbox" v-model="formData.promotionalEmails" class="checkbox-input" />
+                        <input
+                            type="checkbox"
+                            v-model="formData.promotionalEmails"
+                            class="checkbox-input"
+                        >
                         <span class="checkbox-custom"></span>
                         <div class="preference-info">
-                          <h4>Promotional Offers</h4>
-                          <p>Receive special offers and discounts</p>
+                          <h4>Offres promotionnelles</h4>
+                          <p>Recevez des offres spéciales et des réductions</p>
                         </div>
                       </label>
                     </div>
@@ -541,15 +445,15 @@
                 <div class="form-actions">
                   <button type="button" class="btn-secondary" @click="previousStep">
                     <i class="icon-arrow-left"></i>
-                    Back
+                    Retour
                   </button>
                   <button type="submit" class="btn-primary" :disabled="loading">
                     <span v-if="loading">
                       <i class="icon-loader"></i>
-                      Processing...
+                      Vérification...
                     </span>
                     <span v-else>
-                      Continue
+                      Continuer
                       <i class="icon-arrow-right"></i>
                     </span>
                   </button>
@@ -557,33 +461,37 @@
               </form>
             </div>
 
-            <!-- STEP 4: Email Verification -->
+            <!-- Étape 4 : Vérification -->
             <div v-show="currentStep === 'verification'" class="form-step">
               <div class="verification-step">
                 <div class="verification-header">
                   <div class="verification-icon">
                     <i class="icon-mail"></i>
                   </div>
-                  <h2>Verify Your Email</h2>
+                  <h2>Vérifiez votre email</h2>
                   <p class="verification-description">
-                    We've sent a verification code to
+                    Nous avons envoyé un code de vérification à
                     <strong>{{ formData.email }}</strong>
                   </p>
                 </div>
 
                 <form @submit.prevent="verifyEmail">
                   <div class="verification-code">
-                    <div v-for="(digit, index) in verificationCode" :key="index" class="code-digit">
+                    <div
+                        v-for="(digit, index) in verificationCode"
+                        :key="index"
+                        class="code-digit"
+                    >
                       <input
-                        type="text"
-                        :ref="`codeInput${index}`"
-                        v-model="verificationCode[index]"
-                        maxlength="1"
-                        @input="onCodeInput(index, $event)"
-                        @keydown.delete="onCodeDelete(index, $event)"
-                        @paste="onCodePaste"
-                        :class="{ 'code-input': true, 'filled': verificationCode[index] }"
-                      />
+                          type="text"
+                          :ref="`codeInput${index}`"
+                          v-model="verificationCode[index]"
+                          maxlength="1"
+                          @input="onCodeInput(index, $event)"
+                          @keydown.delete="onCodeDelete(index, $event)"
+                          @paste="onCodePaste"
+                          :class="{ 'code-input': true, 'filled': verificationCode[index] }"
+                      >
                     </div>
                   </div>
 
@@ -593,23 +501,23 @@
 
                   <div class="verification-timer">
                     <p v-if="countdown > 0">
-                      You can resend the code in
-                      <strong>{{ formatCountdown }}</strong>
+                      Vous pourrez renvoyer le code dans
+                      <strong>{{ countdown }}</strong>
                     </p>
                     <button
-                      v-else
-                      type="button"
-                      class="btn-resend"
-                      @click="resendVerificationCode"
-                      :disabled="resending"
+                        v-else
+                        type="button"
+                        class="btn-resend"
+                        @click="resendVerificationCode"
+                        :disabled="resending"
                     >
                       <span v-if="resending">
                         <i class="icon-loader"></i>
-                        Sending...
+                        Envoi en cours...
                       </span>
                       <span v-else>
                         <i class="icon-refresh-cw"></i>
-                        Resend Code
+                        Renvoyer le code
                       </span>
                     </button>
                   </div>
@@ -617,23 +525,23 @@
                   <div class="verification-note">
                     <p>
                       <i class="icon-info"></i>
-                      If you don't receive the email, check your spam folder.
-                      The code expires in 15 minutes.
+                      Si vous ne recevez pas l'email, vérifiez votre dossier spam.
+                      Le code expirera dans 15 minutes.
                     </p>
                   </div>
 
                   <div class="form-actions">
                     <button type="button" class="btn-secondary" @click="previousStep">
                       <i class="icon-arrow-left"></i>
-                      Change Email
+                      Modifier l'email
                     </button>
                     <button type="submit" class="btn-primary" :disabled="verifying">
                       <span v-if="verifying">
                         <i class="icon-loader"></i>
-                        Verifying...
+                        Vérification...
                       </span>
                       <span v-else>
-                        Verify
+                        Vérifier
                         <i class="icon-arrow-right"></i>
                       </span>
                     </button>
@@ -642,7 +550,7 @@
               </div>
             </div>
 
-            <!-- STEP 5: Confirmation -->
+            <!-- Étape 5 : Confirmation -->
             <div v-show="currentStep === 'confirmation'" class="form-step">
               <div class="confirmation-step">
                 <div class="confirmation-animation">
@@ -657,45 +565,45 @@
                 </div>
 
                 <div class="confirmation-content">
-                  <h2>Congratulations!</h2>
+                  <h2>Félicitations !</h2>
                   <p class="confirmation-description">
-                    Your account has been successfully created. Welcome to EDUCOURS!
+                    Votre compte a été créé avec succès. Bienvenue sur EDUCOURS !
                   </p>
 
                   <div class="account-summary">
                     <div class="summary-item">
                       <i class="icon-user"></i>
                       <div class="summary-info">
-                        <h4>Full Name</h4>
+                        <h4>Nom complet</h4>
                         <p>{{ formData.firstName }} {{ formData.lastName }}</p>
                       </div>
                     </div>
                     <div class="summary-item">
                       <i class="icon-mail"></i>
                       <div class="summary-info">
-                        <h4>Email Verified</h4>
+                        <h4>Email vérifié</h4>
                         <p>{{ formData.email }}</p>
                       </div>
                     </div>
                     <div class="summary-item">
                       <i class="icon-calendar"></i>
                       <div class="summary-info">
-                        <h4>Account Created</h4>
-                        <p>{{ new Date().toLocaleDateString('en-US') }}</p>
+                        <h4>Compte créé le</h4>
+                        <p>{{ new Date().toLocaleDateString('fr-FR') }}</p>
                       </div>
                     </div>
                   </div>
 
                   <div class="next-steps">
-                    <h3>Next Steps</h3>
+                    <h3>Prochaines étapes</h3>
                     <div class="steps-grid">
                       <div class="step-card">
                         <div class="step-icon">
                           <i class="icon-user-check"></i>
                         </div>
                         <div class="step-content">
-                          <h4>Complete Your Profile</h4>
-                          <p>Add a photo and more information to personalize your experience</p>
+                          <h4>Complétez votre profil</h4>
+                          <p>Ajoutez une photo et plus d'informations pour personnaliser votre expérience</p>
                         </div>
                       </div>
                       <div class="step-card">
@@ -703,8 +611,8 @@
                           <i class="icon-compass"></i>
                         </div>
                         <div class="step-content">
-                          <h4>Explore Courses</h4>
-                          <p>Discover recommended courses based on your interests</p>
+                          <h4>Explorez les cours</h4>
+                          <p>Découvrez nos cours recommandés basés sur vos centres d'intérêt</p>
                         </div>
                       </div>
                       <div class="step-card">
@@ -712,30 +620,30 @@
                           <i class="icon-video"></i>
                         </div>
                         <div class="step-content">
-                          <h4>Join a Live Class</h4>
-                          <p>Participate in our upcoming interactive sessions</p>
+                          <h4>Rejoignez un cours en direct</h4>
+                          <p>Participez à nos prochaines sessions interactives</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="confirmation-actions">
-                    <router-link :to="dashboardRoute" class="btn-primary">
+                    <router-link to="/dashboard/admin/DashboardView.vue" class="btn-primary">
                       <i class="icon-layout"></i>
-                      Go to Dashboard
+                      Accéder à mon tableau de bord
                     </router-link>
-                    <router-link to="/courses" class="btn-secondary">
+                    <router-link to="/courses/CourseListView.vue" class="btn-secondary">
                       <i class="icon-book"></i>
-                      Explore Courses
+                      Explorer les cours
                     </router-link>
                   </div>
 
                   <div class="welcome-message">
                     <p>
                       <i class="icon-sparkles"></i>
-                      We're thrilled to welcome you to our community of
-                      <strong>50,000+ learners</strong>.
-                      Start your learning journey today!
+                      Nous sommes ravis de vous accueillir dans notre communauté de
+                      <strong>50,000+ apprenants</strong>.
+                      Commencez votre voyage d'apprentissage dès maintenant !
                     </p>
                   </div>
                 </div>
@@ -746,21 +654,23 @@
           <!-- Footer -->
           <div class="form-footer">
             <p>
-              By creating an account, you agree to our
-              <router-link to="/terms" class="footer-link">Terms of Use</router-link>
-              and
-              <router-link to="/privacy" class="footer-link">Privacy Policy</router-link>
+              En créant un compte, vous acceptez nos
+              <router-link to="/terms" class="footer-link">Conditions d'utilisation</router-link>
+              et notre
+              <router-link to="/privacy" class="footer-link">Politique de confidentialité</router-link>
             </p>
-            <p class="copyright">© 2024 EDUCOURS. All rights reserved.</p>
+            <p class="copyright">
+              © 2024 EDUCOURS. Tous droits réservés.
+            </p>
           </div>
         </div>
 
-        <!-- Right Column: Benefits & Testimonials -->
+        <!-- Colonne droite : Bénéfices et témoignages -->
         <div class="register-benefits-section">
           <div class="benefits-container">
             <div class="benefits-header">
-              <h2>Why Join EDUCOURS?</h2>
-              <p>Discover what makes us the preferred learning platform</p>
+              <h2>Pourquoi rejoindre EDUCOURS ?</h2>
+              <p>Découvrez ce qui fait de nous la plateforme d'apprentissage préférée</p>
             </div>
 
             <div class="benefits-list">
@@ -769,8 +679,8 @@
                   <i class="icon-award"></i>
                 </div>
                 <div class="benefit-content">
-                  <h3>Recognized Certifications</h3>
-                  <p>Earn certifications valued by employers worldwide</p>
+                  <h3>Certifications reconnues</h3>
+                  <p>Obtenez des certifications valorisées par les employeurs</p>
                 </div>
               </div>
 
@@ -779,8 +689,8 @@
                   <i class="icon-users"></i>
                 </div>
                 <div class="benefit-content">
-                  <h3>Active Community</h3>
-                  <p>Join 50,000+ learners and exchange with experts</p>
+                  <h3>Communauté active</h3>
+                  <p>Rejoignez 50,000+ apprenants et échangez avec des experts</p>
                 </div>
               </div>
 
@@ -789,8 +699,8 @@
                   <i class="icon-video"></i>
                 </div>
                 <div class="benefit-content">
-                  <h3>Live Classes</h3>
-                  <p>Interact live with our certified teachers</p>
+                  <h3>Cours en direct</h3>
+                  <p>Interagissez en direct avec nos enseignants certifiés</p>
                 </div>
               </div>
 
@@ -799,66 +709,70 @@
                   <i class="icon-briefcase"></i>
                 </div>
                 <div class="benefit-content">
-                  <h3>Career Boost</h3>
-                  <p>86% of our learners have improved their careers</p>
+                  <h3>Carrière boostée</h3>
+                  <p>86% de nos apprenants ont amélioré leur carrière</p>
                 </div>
               </div>
             </div>
 
+            <!-- Témoignages -->
             <div class="testimonials">
-              <h3>What Our Learners Say</h3>
+              <h3>Ce que disent nos apprenants</h3>
+
               <div class="testimonial-carousel">
                 <div class="testimonial-item">
                   <div class="testimonial-content">
-                    <p>"EDUCOURS transformed my career. Thanks to the certified courses, I got a promotion."</p>
+                    <p>"EDUCOURS a transformé ma carrière. Grâce aux cours certifiants, j'ai décroché une promotion."</p>
                   </div>
                   <div class="testimonial-author">
                     <div class="author-avatar">
-                      <img src="/avatars/testimonial1.jpg" alt="Marie Dubois" />
+                      <img src="/avatars/testimonial1.jpg" alt="Marie Dubois">
                     </div>
                     <div class="author-info">
                       <h4>Marie Dubois</h4>
-                      <p>Full Stack Developer</p>
+                      <p>Développeuse Full Stack</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
+            <!-- Statistiques -->
             <div class="stats-grid">
               <div class="stat-item">
                 <div class="stat-number">50,000+</div>
-                <div class="stat-label">Active Learners</div>
+                <div class="stat-label">Apprenants actifs</div>
               </div>
               <div class="stat-item">
                 <div class="stat-number">98%</div>
-                <div class="stat-label">Satisfaction Rate</div>
+                <div class="stat-label">Taux de satisfaction</div>
               </div>
               <div class="stat-item">
                 <div class="stat-number">500+</div>
-                <div class="stat-label">Courses Available</div>
+                <div class="stat-label">Cours disponibles</div>
               </div>
               <div class="stat-item">
                 <div class="stat-number">24/7</div>
-                <div class="stat-label">Support Available</div>
+                <div class="stat-label">Support disponible</div>
               </div>
             </div>
 
+            <!-- CTA -->
             <div class="cta-section">
-              <h3>Ready to Transform Your Learning?</h3>
-              <p>Sign up for free and start your first course today.</p>
+              <h3>Prêt à transformer votre apprentissage ?</h3>
+              <p>Inscrivez-vous gratuitement et commencez votre premier cours aujourd'hui.</p>
               <div class="cta-features">
                 <div class="feature">
                   <i class="icon-check"></i>
-                  <span>Free access to introductory courses</span>
+                  <span>Accès gratuit aux cours d'introduction</span>
                 </div>
                 <div class="feature">
                   <i class="icon-check"></i>
-                  <span>Cancel anytime</span>
+                  <span>Annulation à tout moment</span>
                 </div>
                 <div class="feature">
                   <i class="icon-check"></i>
-                  <span>30-day money-back guarantee</span>
+                  <span>Satisfait ou remboursé 30 jours</span>
                 </div>
               </div>
             </div>
@@ -867,7 +781,7 @@
       </div>
     </div>
 
-    <!-- Loading Modal -->
+    <!-- Modal de chargement -->
     <div v-if="showLoadingModal" class="modal-overlay">
       <div class="modal modal-loading">
         <div class="modal-body">
@@ -875,24 +789,24 @@
             <div class="loading-spinner">
               <div class="spinner"></div>
             </div>
-            <h3>Creating Your Account</h3>
-            <p>Please wait while we finalize your registration...</p>
+            <h3>Création de votre compte</h3>
+            <p>Veuillez patienter pendant que nous finalisons votre inscription...</p>
             <div class="loading-steps">
               <div class="loading-step" :class="{ active: loadingStep >= 1 }">
                 <i class="icon-check"></i>
-                <span>Validating information</span>
+                <span>Validation des informations</span>
               </div>
               <div class="loading-step" :class="{ active: loadingStep >= 2 }">
                 <i class="icon-check"></i>
-                <span>Creating your profile</span>
+                <span>Création du profil</span>
               </div>
               <div class="loading-step" :class="{ active: loadingStep >= 3 }">
                 <i class="icon-check"></i>
-                <span>Setting up your workspace</span>
+                <span>Configuration de l'espace personnel</span>
               </div>
               <div class="loading-step" :class="{ active: loadingStep >= 4 }">
                 <i class="icon-check"></i>
-                <span>Finalizing</span>
+                <span>Finalisation</span>
               </div>
             </div>
           </div>
@@ -903,14 +817,14 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue'
+import { ref, computed, reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-// Form state
+// États du formulaire
 const currentStep = ref('basic')
 const completedSteps = ref([])
 const showPassword = ref(false)
@@ -919,145 +833,177 @@ const loading = ref(false)
 const showLoadingModal = ref(false)
 const loadingStep = ref(0)
 
-// Verification state
+// États de vérification
 const verificationCode = ref(['', '', '', '', '', ''])
 const verificationError = ref('')
-const countdown = ref(300)
+const countdown = ref(300) // 5 minutes
 const verifying = ref(false)
 const resending = ref(false)
 
-// Predefined subjects and specialties
-const predefinedSubjects = [
-  'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Computer Science',
-  'Web Development', 'Mobile Development', 'Data Science', 'Artificial Intelligence',
-  'English', 'French', 'Spanish', 'German', 'History', 'Geography',
-  'Economics', 'Business Management', 'Accounting', 'Marketing', 'Design',
-  'Music', 'Art', 'Physical Education', 'Philosophy', 'Psychology'
-]
-
-const predefinedSpecialties = [
-  'JavaScript/TypeScript', 'Python', 'Java', 'C++', 'React', 'Vue.js', 'Angular',
-  'Node.js', 'Django', 'Flask', 'Machine Learning', 'Deep Learning',
-  'Cloud Computing (AWS/Azure/GCP)', 'DevOps', 'Cybersecurity', 'Blockchain',
-  'UI/UX Design', 'Data Analytics', 'Digital Marketing', 'SEO/SEM'
-]
-
-// Teacher lists
-const teacherSubjectsList = ref([])
-const teacherSpecialtiesList = ref([])
-const selectedSubject = ref('')
-const selectedSpecialty = ref('')
-
-// Form data
+// Données du formulaire
 const formData = reactive({
-  // Step 1
+  // Étape 1
   firstName: '',
   lastName: '',
   email: '',
   phone: '',
   password: '',
   confirmPassword: '',
-  role: 'student',
 
-  // Step 2 - Student
-  studentInfo: {
-    level: 'Ordinary Level',
-    school: '',
-    major: '',
-    year: '',
-    guardianName: '',
-    guardianPhone: ''
-  },
-
-  // Step 2 - Teacher
-  teacherInfo: {
-    qualification: '',
-    experience: 0,
-    subjects: [],
-    specialties: [],
-    paymentMethod: {
-      type: 'mtn',
-      details: {
-        mtnNumber: '',
-        orangeNumber: '',
-        bankName: '',
-        accountNumber: ''
-      }
-    }
-  },
-
-  // Location & Bio
+  // Étape 2
+  birthDate: '',
+  gender: '',
   country: '',
   city: '',
+  educationLevel: '',
+  profession: '',
   bio: '',
 
-  // Step 3
+  // Étape 3
   newsletter: true,
   courseRecommendations: true,
   promotionalEmails: false
 })
 
-// Errors
-const errors = reactive({
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone: '',
-  password: '',
-  confirmPassword: '',
-  role: '',
-  country: '',
-  teacherQualification: '',
-  teacherSubjects: ''
-})
+// Erreurs
+const errors = reactive({})
 
-// Interests & Goals
+// Centres d'intérêt
 const selectedInterests = ref([])
-const selectedGoals = ref([])
-
 const availableInterests = ref([
-  { id: 'web_dev', name: 'Web Development', description: 'HTML, CSS, JavaScript, Frameworks', icon: 'icon-code' },
-  { id: 'mobile_dev', name: 'Mobile Development', description: 'React Native, Flutter, iOS, Android', icon: 'icon-smartphone' },
-  { id: 'data_science', name: 'Data Science', description: 'Python, Machine Learning, Data Analysis', icon: 'icon-database' },
-  { id: 'design', name: 'UX/UI Design', description: 'Figma, Adobe XD, Design Thinking', icon: 'icon-palette' },
-  { id: 'marketing', name: 'Digital Marketing', description: 'SEO, Social Media, Content Marketing', icon: 'icon-bar-chart' },
-  { id: 'business', name: 'Business & Entrepreneurship', description: 'Project Management, Leadership, Finance', icon: 'icon-briefcase' },
-  { id: 'languages', name: 'Languages', description: 'English, Spanish, German, Chinese', icon: 'icon-globe' },
-  { id: 'soft_skills', name: 'Soft Skills', description: 'Communication, Management, Creativity', icon: 'icon-users' }
+  {
+    id: 'web_dev',
+    name: 'Développement Web',
+    description: 'HTML, CSS, JavaScript, Frameworks',
+    icon: 'icon-code'
+  },
+  {
+    id: 'mobile_dev',
+    name: 'Développement Mobile',
+    description: 'React Native, Flutter, iOS, Android',
+    icon: 'icon-smartphone'
+  },
+  {
+    id: 'data_science',
+    name: 'Data Science',
+    description: 'Python, Machine Learning, Analyse de données',
+    icon: 'icon-database'
+  },
+  {
+    id: 'design',
+    name: 'Design UX/UI',
+    description: 'Figma, Adobe XD, Design thinking',
+    icon: 'icon-palette'
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing Digital',
+    description: 'SEO, Social Media, Content Marketing',
+    icon: 'icon-bar-chart'
+  },
+  {
+    id: 'business',
+    name: 'Business & Entrepreneuriat',
+    description: 'Gestion de projet, Leadership, Finance',
+    icon: 'icon-briefcase'
+  },
+  {
+    id: 'languages',
+    name: 'Langues',
+    description: 'Anglais, Espagnol, Allemand, Chinois',
+    icon: 'icon-globe'
+  },
+  {
+    id: 'soft_skills',
+    name: 'Soft Skills',
+    description: 'Communication, Management, Créativité',
+    icon: 'icon-users'
+  }
 ])
 
+// Objectifs
+const selectedGoals = ref([])
 const availableGoals = ref([
-  { id: 'career_change', title: 'Change Career', description: 'Acquire new skills for a career change' },
-  { id: 'skill_improvement', title: 'Improve Skills', description: 'Develop my current skills' },
-  { id: 'promotion', title: 'Get a Promotion', description: 'Prepare for career advancement' },
-  { id: 'personal_development', title: 'Personal Development', description: 'Learn out of curiosity and personal interest' },
-  { id: 'freelance', title: 'Become a Freelancer', description: 'Develop skills to work independently' },
-  { id: 'entrepreneurship', title: 'Start a Business', description: 'Acquire skills to launch my business' }
+  {
+    id: 'career_change',
+    title: 'Changer de carrière',
+    description: 'Acquérir de nouvelles compétences pour une reconversion'
+  },
+  {
+    id: 'skill_improvement',
+    title: 'Améliorer mes compétences',
+    description: 'Développer mes compétences actuelles'
+  },
+  {
+    id: 'promotion',
+    title: 'Obtenir une promotion',
+    description: 'Me préparer pour une évolution professionnelle'
+  },
+  {
+    id: 'personal_development',
+    title: 'Développement personnel',
+    description: 'Apprendre par curiosité et intérêt personnel'
+  },
+  {
+    id: 'freelance',
+    title: 'Devenir freelance',
+    description: 'Développer des compétences pour travailler indépendamment'
+  },
+  {
+    id: 'entrepreneurship',
+    title: 'Créer mon entreprise',
+    description: 'Acquérir les compétences nécessaires pour lancer mon business'
+  }
 ])
 
-// Steps
+// Étapes
 const steps = ref([
-  { id: 'basic', title: 'Basic Info', description: 'Your main coordinates' },
-  { id: 'profile', title: 'Profile', description: 'About you' },
-  { id: 'preferences', title: 'Preferences', description: 'Your interests' },
-  { id: 'verification', title: 'Verification', description: 'Confirm your email' },
-  { id: 'confirmation', title: 'Confirmation', description: "You're all set!" }
+  {
+    id: 'basic',
+    title: 'Informations de base',
+    description: 'Vos coordonnées principales'
+  },
+  {
+    id: 'profile',
+    title: 'Profil personnel',
+    description: 'À propos de vous'
+  },
+  {
+    id: 'preferences',
+    title: 'Préférences',
+    description: 'Vos centres d\'intérêt'
+  },
+  {
+    id: 'verification',
+    title: 'Vérification',
+    description: 'Confirmez votre email'
+  },
+  {
+    id: 'confirmation',
+    title: 'Confirmation',
+    description: 'C\'est terminé !'
+  }
 ])
 
-// Computed
-const dashboardRoute = computed(() => {
-  if (formData.role === 'student') return '/dashboard'
-  if (formData.role === 'teacher') return '/dashboard/teacher'
-  return '/dashboard'
-})
-
+// Calculs
 const passwordStrength = computed(() => {
   let strength = 0
+
+  // Longueur minimale
   if (formData.password.length >= 8) strength += 20
+
+  // Majuscule
   if (/[A-Z]/.test(formData.password)) strength += 20
+
+  // Minuscule
   if (/[a-z]/.test(formData.password)) strength += 20
+
+  // Chiffre
   if (/[0-9]/.test(formData.password)) strength += 20
+
+  // Caractère spécial
   if (/[^A-Za-z0-9]/.test(formData.password)) strength += 20
+
   return strength
 })
 
@@ -1068,9 +1014,9 @@ const passwordStrengthClass = computed(() => {
 })
 
 const passwordStrengthText = computed(() => {
-  if (passwordStrength.value < 40) return 'Weak'
-  if (passwordStrength.value < 80) return 'Medium'
-  return 'Strong'
+  if (passwordStrength.value < 40) return 'Faible'
+  if (passwordStrength.value < 80) return 'Moyen'
+  return 'Fort'
 })
 
 const hasMinLength = computed(() => formData.password.length >= 8)
@@ -1079,60 +1025,54 @@ const hasLowerCase = computed(() => /[a-z]/.test(formData.password))
 const hasNumber = computed(() => /[0-9]/.test(formData.password))
 const hasSpecialChar = computed(() => /[^A-Za-z0-9]/.test(formData.password))
 
+// Calcul pour le compte à rebours
 const formatCountdown = computed(() => {
   const minutes = Math.floor(countdown.value / 60)
   const seconds = countdown.value % 60
   return `${minutes}:${seconds.toString().padStart(2, '0')}`
 })
 
-// Validation
-const validateField = (field) => {
-  switch (field) {
-    case 'firstName':
-      errors.firstName = !formData.firstName ? 'First name is required' : ''
-      break
-    case 'lastName':
-      errors.lastName = !formData.lastName ? 'Last name is required' : ''
-      break
-    case 'email':
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      errors.email = !formData.email ? 'Email is required' : !emailRegex.test(formData.email) ? 'Invalid email format' : ''
-      break
-    case 'phone':
-      errors.phone = !formData.phone ? 'Phone number is required' : ''
-      break
-    case 'password':
-      errors.password = formData.password.length < 8 ? 'Password must be at least 8 characters' : ''
-      break
-    case 'confirmPassword':
-      errors.confirmPassword = formData.confirmPassword !== formData.password ? 'Passwords do not match' : ''
-      break
-    case 'teacherQualification':
-      errors.teacherQualification = !formData.teacherInfo.qualification ? 'Qualification is required' : ''
-      break
+// ========== AJOUTEZ À PARTIR D'ICI ==========
+
+// Fonction pour naviguer entre les étapes
+const goToStep = (stepId) => {
+  if (completedSteps.value.includes(stepId)) {
+    currentStep.value = stepId
   }
 }
 
-// Step validation
 const validateStep1 = () => {
   loading.value = true
+  errors.value = {}
+
+  // Validation simple
   let isValid = true
 
-  validateField('firstName')
-  validateField('lastName')
-  validateField('email')
-  validateField('phone')
-  validateField('password')
-  validateField('confirmPassword')
-
-  if (!formData.role) {
-    errors.role = 'Please select a role'
+  if (!formData.firstName.trim()) {
+    errors.firstName = 'Le prénom est requis'
     isValid = false
-  } else {
-    errors.role = ''
   }
 
-  if (errors.firstName || errors.lastName || errors.email || errors.phone || errors.password || errors.confirmPassword || errors.role) {
+  if (!formData.lastName.trim()) {
+    errors.lastName = 'Le nom est requis'
+    isValid = false
+  }
+
+  if (!formData.email.trim()) {
+    errors.email = 'L\'email est requis'
+    isValid = false
+  } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    errors.email = 'Format d\'email invalide'
+    isValid = false
+  }
+
+  if (formData.password.length < 8) {
+    errors.password = 'Le mot de passe doit avoir au moins 8 caractères'
+    isValid = false
+  }
+
+  if (formData.password !== formData.confirmPassword) {
+    errors.confirmPassword = 'Les mots de passe ne correspondent pas'
     isValid = false
   }
 
@@ -1142,29 +1082,18 @@ const validateStep1 = () => {
       completedSteps.value.push('basic')
       currentStep.value = 'profile'
     }
-  }, 500)
+  }, 1000)
 }
 
 const validateStep2 = () => {
   loading.value = true
+  errors.value = {}
+
   let isValid = true
 
   if (!formData.country) {
-    errors.country = 'Country is required'
+    errors.country = 'Le pays est requis'
     isValid = false
-  } else {
-    errors.country = ''
-  }
-
-  if (formData.role === 'teacher') {
-    validateField('teacherQualification')
-    if (teacherSubjectsList.value.length === 0) {
-      errors.teacherSubjects = 'Please add at least one subject'
-      isValid = false
-    } else {
-      errors.teacherSubjects = ''
-    }
-    if (errors.teacherQualification) isValid = false
   }
 
   setTimeout(() => {
@@ -1175,53 +1104,27 @@ const validateStep2 = () => {
       }
       currentStep.value = 'preferences'
     }
-  }, 500)
+  }, 1000)
 }
 
-const validateStep3 = async () => {
+const validateStep3 = () => {
   loading.value = true
-  
-  try {
-    // Appel API pour envoyer le vrai code
-    const response = await fetch('http://localhost:5000/api/auth/send-verification-code', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        email: formData.email,
-        firstName: formData.firstName
-      })
-    })
-    
-    const data = await response.json()
-    
-    if (data.success) {
-      console.log('Code envoyé avec succès à', formData.email)
-      
-      if (!completedSteps.value.includes('preferences')) {
-        completedSteps.value.push('preferences')
-      }
-      currentStep.value = 'verification'
-      startCountdown()
-    } else {
-      verificationError.value = data.message || 'Erreur lors de l\'envoi du code'
-      loading.value = false
-    }
-  } catch (err) {
-    console.error('Erreur:', err)
-    verificationError.value = 'Erreur réseau. Vérifie que le backend est démarré.'
-    loading.value = false
-  } finally {
-    loading.value = false
-  }
-}
+  const generatetedCode = Math.floor(100000 + Math.random() * 900000)
 
-// Navigation
-const goToStep = (stepId) => {
-  if (completedSteps.value.includes(stepId)) {
-    currentStep.value = stepId
-  }
+  console.log(' Code de verification (pour test):', generatetedCode)
+  console.log(' Envoye a:', formData.email)
+
+  window.testVerificationCode = generatetedCode.toString()
+
+  setTimeout(() => {
+    loading.value = false
+    if (!completedSteps.value.includes('preferences')) {
+      completedSteps.value.push('preferences')
+    }
+    currentStep.value = 'verification'
+    // Commencer le compte à rebours
+    startCountdown()
+  }, 1000)
 }
 
 const previousStep = () => {
@@ -1231,30 +1134,14 @@ const previousStep = () => {
   }
 }
 
-// Subject handlers
-const addSubject = () => {
-  if (selectedSubject.value) {
-    teacherSubjectsList.value.push(selectedSubject.value)
-    selectedSubject.value = ''
-  }
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value
 }
 
-const removeSubject = (idx) => {
-  teacherSubjectsList.value.splice(idx, 1)
+const toggleConfirmPasswordVisibility = () => {
+  showConfirmPassword.value = !showConfirmPassword.value
 }
 
-const addSpecialty = () => {
-  if (selectedSpecialty.value) {
-    teacherSpecialtiesList.value.push(selectedSpecialty.value)
-    selectedSpecialty.value = ''
-  }
-}
-
-const removeSpecialty = (idx) => {
-  teacherSpecialtiesList.value.splice(idx, 1)
-}
-
-// Interest handlers
 const toggleInterest = (interestId) => {
   const index = selectedInterests.value.indexOf(interestId)
   if (index === -1) {
@@ -1273,43 +1160,15 @@ const toggleGoal = (goalId) => {
   }
 }
 
-// Password visibility
-const togglePasswordVisibility = () => {
-  showPassword.value = !showPassword.value
-}
-
-const toggleConfirmPasswordVisibility = () => {
-  showConfirmPassword.value = !showConfirmPassword.value
-}
-
-// Verification
 const verifyEmail = async () => {
   verifying.value = true
   verificationError.value = ''
 
   const code = verificationCode.value.join('')
 
-  try {
-    const response = await fetch('http://localhost:5000/api/auth/verify-code', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        email: formData.email, 
-        code: code,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        password: formData.password,
-        role: formData.role,
-        phone: formData.phone,
-        city: formData.city
-      })
-    })
-
-    const data = await response.json()
-
-    if (data.success) {
+  // Simulation de vérification
+  setTimeout(() => {
+    if (code === window.testVerificationCode) { // Code test
       verifying.value = false
       if (!completedSteps.value.includes('verification')) {
         completedSteps.value.push('verification')
@@ -1317,61 +1176,46 @@ const verifyEmail = async () => {
       currentStep.value = 'confirmation'
     } else {
       verifying.value = false
-      verificationError.value = data.message || 'Code de vérification incorrect'
+      verificationError.value = 'Code de vérification incorrect'
+      // Réinitialiser le code
       verificationCode.value = ['', '', '', '', '', '']
+      // Focus sur le premier input
+      setTimeout(() => {
+        const firstInput = document.querySelector('input[ref="codeInput0"]')
+        if (firstInput) firstInput.focus()
+      }, 100)
     }
-  } catch (err) {
-    console.error('Erreur:', err)
-    verifying.value = false
-    verificationError.value = 'Erreur lors de la vérification'
-  }
+  }, 1500)
 }
 
 const resendVerificationCode = async () => {
   resending.value = true
-  
-  try {
-    const response = await fetch('http://localhost:5000/api/auth/send-verification-code', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        email: formData.email,
-        firstName: formData.firstName
-      })
-    })
-    
-    const data = await response.json()
-    
-    if (data.success) {
-      countdown.value = 300
-      startCountdown()
-      verificationError.value = 'Nouveau code envoyé !'
-      setTimeout(() => {
-        verificationError.value = ''
-      }, 3000)
-    } else {
-      verificationError.value = data.message || 'Erreur lors du renvoi'
-    }
-  } catch (err) {
-    verificationError.value = 'Erreur réseau'
-  } finally {
+
+  setTimeout(() => {
     resending.value = false
-  }
+    countdown.value = 300 // Redémarrer à 5 minutes
+    startCountdown()
+    verificationError.value = 'Nouveau code envoyé !'
+  }, 1000)
 }
 
 const onCodeInput = (index, event) => {
   const value = event.target.value
+
+  // N'accepter que les chiffres
   if (value && !/^\d$/.test(value)) {
     verificationCode.value[index] = ''
     return
   }
+
   verificationCode.value[index] = value
+
   if (value && index < 5) {
     setTimeout(() => {
       const nextInput = document.querySelector(`input[ref="codeInput${index + 1}"]`)
-      if (nextInput) nextInput.focus()
+      if (nextInput) {
+        nextInput.focus()
+      }
     }, 10)
   }
 }
@@ -1380,7 +1224,9 @@ const onCodeDelete = (index, event) => {
   if (!verificationCode.value[index] && index > 0) {
     setTimeout(() => {
       const prevInput = document.querySelector(`input[ref="codeInput${index - 1}"]`)
-      if (prevInput) prevInput.focus()
+      if (prevInput) {
+        prevInput.focus()
+      }
     }, 10)
   }
 }
@@ -1391,12 +1237,21 @@ const onCodePaste = (event) => {
     for (let i = 0; i < 6; i++) {
       verificationCode.value[i] = paste[i]
     }
+    // Focus sur le dernier input
+    setTimeout(() => {
+      const lastInput = document.querySelector('input[ref="codeInput5"]')
+      if (lastInput) {
+        lastInput.focus()
+      }
+    }, 10)
     event.preventDefault()
   }
 }
 
+// Fonction pour démarrer le compte à rebours
 const startCountdown = () => {
   if (countdown.value <= 0) return
+
   const timer = setInterval(() => {
     if (countdown.value > 0) {
       countdown.value--
@@ -1406,32 +1261,17 @@ const startCountdown = () => {
   }, 1000)
 }
 
-// Submit
-const handleSubmit = async () => {
-  // This would call the auth store
-  console.log('Submitting registration...')
-}
-
+// Démarrer le compte à rebours au montage si on est à l'étape vérification
 onMounted(() => {
   if (currentStep.value === 'verification') {
     startCountdown()
   }
 })
+
+
 </script>
 
 <style scoped>
-
-
-.register-view {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
-}
 .register-view {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -2737,187 +2577,4 @@ label {
     padding: 2rem 1.5rem;
   }
 }
-
-/* Role Cards - Professional Style */
-.role-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-}
-
-.role-card {
-  position: relative;
-  padding: 1.75rem 1.5rem;
-  background: white;
-  border: 2px solid #e5e7eb;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
-  overflow: hidden;
-}
-
-/* Hover effect */
-.role-card:hover {
-  transform: translateY(-4px);
-  border-color: #c7d2fe;
-  box-shadow: 0 20px 25px -12px rgba(79, 70, 229, 0.15);
-}
-
-/* Selected state */
-.role-card.selected {
-  border-color: #4f46e5;
-  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
-  box-shadow: 0 20px 25px -12px rgba(79, 70, 229, 0.25);
-}
-
-/* Glow effect on selected */
-.role-card.selected::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #4f46e5, #818cf8, #4f46e5);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-/* Checkmark badge on selected */
-.role-card.selected::after {
-  content: '✓';
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
-  background: #4f46e5;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-@keyframes popIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  80% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Role icon */
-.role-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.role-card:hover .role-icon {
-  transform: scale(1.1);
-}
-
-.role-card.selected .role-icon {
-  transform: scale(1.05);
-}
-
-/* Role title */
-.role-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
-}
-
-.role-card.selected .role-title {
-  color: #4f46e5;
-}
-
-/* Role description */
-.role-desc {
-  font-size: 0.875rem;
-  color: #6b7280;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.role-card.selected .role-desc {
-  color: #4b5563;
-}
-
-/* Optional: Add a subtle pulse animation to the selected card */
-.role-card.selected {
-  animation: gentlePulse 2s ease-in-out infinite;
-}
-
-@keyframes gentlePulse {
-  0%, 100% {
-    box-shadow: 0 20px 25px -12px rgba(79, 70, 229, 0.25);
-  }
-  50% {
-    box-shadow: 0 25px 35px -12px rgba(79, 70, 229, 0.4);
-  }
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .role-cards {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .role-card {
-    padding: 1.25rem 1rem;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    gap: 1rem;
-  }
-  
-  .role-icon {
-    margin-bottom: 0;
-    font-size: 2rem;
-  }
-  
-  .role-info {
-    flex: 1;
-  }
-  
-  .role-title {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .role-desc {
-    font-size: 0.75rem;
-  }
-  
-  .role-card.selected::after {
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-    top: 8px;
-    right: 8px;
-  }
-}
-
 </style>

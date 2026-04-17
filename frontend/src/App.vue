@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, provide } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import LoadingOverlay from 'vue-loading-overlay'
@@ -37,6 +37,8 @@ const authStore = useAuthStore ? useAuthStore() : null
 
 // États
 const globalLoading = ref(false)
+
+provide('globalLoading', globalLoading)
 
 // Gestion d'erreur SÉCURISÉE
 const handleGlobalError = (error) => {

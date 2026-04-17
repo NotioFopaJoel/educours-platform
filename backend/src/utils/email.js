@@ -16,8 +16,8 @@ const createTransporter = () => {
         port: process.env.SMTP_PORT || 587,
         secure: process.env.SMTP_SECURE === 'true',
         auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS
+            user: process.env.SMTP_USER || process.env.EMAIL_USER,
+            pass: process.env.SMTP_PASS || process.env.EMAIL_PASS
         },
         tls: {
             rejectUnauthorized: false
@@ -154,7 +154,7 @@ const sendEmailSimple = async (options) => {
     };
 };
 
-// Utilisez la version simple en développement
+// Utilisez la version simple en développement pour tester
 module.exports = process.env.NODE_ENV === 'production' ? sendEmail : sendEmailSimple;
 module.exports.sendTemplateEmail = sendTemplateEmail;
 module.exports.emailTemplates = emailTemplates;

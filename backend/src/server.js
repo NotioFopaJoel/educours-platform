@@ -391,30 +391,31 @@ server.listen(PORT, '0.0.0.0', () => {
 });
 
 // ================ 18. ARRÊT PROPRE ================
-const gracefulShutdown = () => {
+const gracefulShutdown = async () => {
   logger.info('🛑 Arrêt propre du serveur...');
   
   // Fermer le serveur HTTP
   server.close(() => {
     logger.info('✅ Serveur HTTP fermé');
-    
-    // Fermer MongoDB
-    mongoose.connection.close(false, () => {
-      logger.info('✅ MongoDB fermé');
-      process.exit(0);
-    });
-    
-    // Timeout de sécurité
-    setTimeout(() => {
-      logger.error('❌ Timeout lors de l\'arrêt - Forcé');
-      process.exit(1);
-    }, 10000);
   });
+  
+  try {
+    // Version Mongoose 6+ - PAS de callback
+    await mongoose.connection.close(false);
+    logger.info('✅ MongoDB fermé');
+    process.exit(0);
+  } catch (error) {
+    logger.error('❌ Erreur lors de la fermeture MongoDB:', error);
+    process.exit(1);
+  }
+  
+  // Timeout de sécurité
+  setTimeout(() => {
+    logger.error('❌ Timeout lors de l\'arrêt - Forcé');
+    process.exit(1);
+  }, 10000);
 };
 
 // Capturer les signaux d'arrêt
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
-
-module.exports = { app, server, io };
-console.log("the server is running good......");
