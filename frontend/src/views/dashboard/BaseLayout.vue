@@ -483,7 +483,7 @@
 import { ref, computed, onMounted, watch, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { useCourseStore } from '@/stores/courses'
+//import { useCourseStore } from '@/stores/courses'
 import { useNotificationStore } from '@/stores/notifications'
 import PaymentCheckout from '@/components/payment/PaymentCheckout.vue'
 import CourseInterface from '@/components/courses/CourseInterface.vue'
