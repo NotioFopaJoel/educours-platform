@@ -9,7 +9,8 @@ import 'vue-toastification/dist/index.css'
 
 // Styles globaux
 import '@/assets/css/main.css'
-import '@/assets/css/variables.css'
+
+
 
 // Configuration Pinia (avec persistence si besoin)
 const pinia = createPinia()
