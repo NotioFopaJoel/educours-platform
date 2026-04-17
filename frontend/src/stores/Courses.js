@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import axios from 'axios'
+
 
 export const useCourseStore = defineStore('courses', () => {
   // État
@@ -11,7 +11,7 @@ export const useCourseStore = defineStore('courses', () => {
   const teacherStudents = ref(0)
   const totalRevenue = ref(0)
   const isLoading = ref(false)
-  const error = ref(null)
+
 
   // Getters
   const getCourseById = (id) => {
