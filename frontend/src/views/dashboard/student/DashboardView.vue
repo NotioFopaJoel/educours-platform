@@ -321,7 +321,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { useCourseStore } from '@/stores/courses'
 import { useAssignmentStore } from '@/stores/assignments'
 import { useLiveClassStore } from '@/stores/liveClasses'
 import { useToast } from 'vue-toastification'
